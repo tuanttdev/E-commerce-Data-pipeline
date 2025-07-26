@@ -1,4 +1,3 @@
-clone project
 # create venv with python 3.10  
 python3.10 -m venv .venv
 activate venv  

@@ -2,11 +2,19 @@ from pymongo import MongoClient
 import pandas as pd
 from sqlalchemy import create_engine
 import subprocess
-
-
 # Kết nối tới MongoDB (cloud)
+import os
 DATABASE_MONGODB = 'retail_categories_db'
-CONNECTION_STRING = "mongodb+srv://ttuan:Tuan451602%40@cluster0.e4tpme5.mongodb.net/"
+CONNECTION_STRING = "your connection string to mongodb"
+
+filename = '.secretkey'
+
+if os.path.isfile(filename):
+    with open(filename, 'r') as f:
+        first_line = f.readline().strip()
+        CONNECTION_STRING = first_line
+
+# print(f"CONNECTION_STRING: {CONNECTION_STRING}")
 
 def connect_mongodb(database = DATABASE_MONGODB):
     client = MongoClient(CONNECTION_STRING)
@@ -65,8 +73,8 @@ def update_location_id_for_customer():
     return
 
 
-def update_location_id_for_customer():
-
-    db = connect_mongodb()
+# def update_location_id_for_customer():
+#
+#     db = connect_mongodb()
 if __name__ == '__main__':
-    update_location_id_for_customer()
+    print(get_collection('product'))

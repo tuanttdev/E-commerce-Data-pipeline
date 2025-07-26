@@ -1,0 +1,12 @@
+/.venv
+/.idea
+/logs
+/log_services
+/airflow-*
+/jars
+*test*
+*example*
+__pycache__/
+*.pyc
+*Zone.iden*
+.secretkey
