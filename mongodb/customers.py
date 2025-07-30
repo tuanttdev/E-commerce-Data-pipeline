@@ -29,10 +29,6 @@ def extract_collection(data_interval_start=None, data_interval_end=None, full_lo
         data = collection.find()
     else:
         ## incremental load
-
-        data_interval_start = data_interval_start.strftime('%Y-%m-%d %H:%M:%S')
-        data_interval_end = data_interval_end.strftime('%Y-%m-%d %H:%M:%S')
-
         print(f"ETL từ {data_interval_start} đến {data_interval_end}")
         data = collection.find({"update_date": {"$gte": data_interval_start, "$lt": data_interval_end}})
 
