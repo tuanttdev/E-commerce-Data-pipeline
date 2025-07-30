@@ -9,4 +9,5 @@
 __pycache__/
 *.pyc
 *Zone.iden*
-.secretkey
+.env
+*.pid
