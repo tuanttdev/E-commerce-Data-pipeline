@@ -1,70 +1,17 @@
-# create venv with python 3.10  
-python3.10 -m venv .venv
-activate venv  
+# 📦 E-commerce Retail ETL Pipeline  
 
-source .venv/bin/activate
+This project demonstrates an **end-to-end ETL pipeline** in the **e-commerce retail** domain.  
+It simulates an **OLTP transactional database** with automated fake data generation,  
+processes data through a modern **ETL workflow**,  
+loads it into an **OLAP data warehouse**,  
+and visualizes insights via a **Business Intelligence (BI) application**.  
 
-# install dependencies
-pip install -r requirements.txt 
+## ✨ Key Features  
 
-# set up airflow 
-create database postgres
+- **Automated data generation** for realistic e-commerce transactions *(orders, customers, products, payments, locations, etc.)*.  
+- **ETL pipeline** for data extraction, transformation, and loading into the data warehouse.  
+- **OLTP → OLAP** transition for analytical processing.  
+- **BI dashboard** for sales performance, trends, and KPIs visualization.  
 
-psql -U postgres -h localhost
-
-password =  postgres (depend on you)
-
-CREATE DATABASE "airflowRetailETLProject"
-  WITH OWNER = postgres
-       ENCODING = 'UTF8'
-       CONNECTION LIMIT = -1;
-
-return to the cmd screen 
-
-cd to airflow folder
-
-export AIRFLOW_HOME=~/retailETLProject/airflow/
-
-export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres@localhost/airflowRetailETLProject
-
-airflow db init
-
-success if the airflow.cfg file appear 
-
-airflow users create \
-    --username admin \
-    --firstname YourFirstName \
-    --lastname YourLastName \
-    --role Admin \
-    --email admin@example.com \
-    --password admin
-
-check the sql_alchemy_conn variable again
-
-then start the web server 
-
-airflow webserver -p 8080 , to start the webserver 
-
-airflow scheduler , to start the scheduler
-
-access the localhost:8080 to see the result 
-
-now, you can see many example dags, you don't need it, come back to the airflow.cfg file
-change this row to False: 
-
-load_examples = False
-
-then , restart the scheduler
-
-# design snowflake schema
-
-dim_address
-dim_date
-dim_order
-dim_customer
-dim_product
-fact_detail_order
-
-chose scd type 2 to keep track of the history of dimension
-
-setting clickhouse 
+## 🛠 Tech Stack  
+`Python` • `SQL` • `NoSQL` • `Apache Airflow` • `Apache Spark` • `MongoDB` • `PostgreSQL` • `ClickHouse` • `Power BI`
