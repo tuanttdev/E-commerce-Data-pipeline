@@ -86,15 +86,16 @@ def random_datetime_last_2_years():
 
 def update_create_update_time_for_product():
     db = connect_mongodb()
-    collection = db.product  # hoặc db.product nếu collection tên 'product'
+    collection = db.city  # hoặc db.product nếu collection tên 'product'
 
     # Lấy toàn bộ document
     documents = list(collection.find())
     print(documents[1])
     print(len(documents))
+    now = datetime(year=2025,month=7,day=1)
 
     for doc in documents:
-        now = random_datetime_last_2_years()
+        # now = random_datetime_last_2_years()
         print(now)
         # Tạo dữ liệu update
         update_fields = {

@@ -1,7 +1,8 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, TimestampType, ArrayType
-from windows_ultis.get_windows_host import get_windows_host_ip
+
+from windows_ultis.get_windows_host import (get_windows_host_ip)
 from postgres.connect import USER_POSTGRES, PASSWORD_POSTGRES
 
 WINDOWS_HOST_IP = get_windows_host_ip()
