@@ -2,20 +2,38 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, TimestampType, ArrayType, NullType
 
-from windows_ultis.get_windows_host import (get_windows_host_ip)
-from postgres.connect import USER_POSTGRES, PASSWORD_POSTGRES
+# from windows_ultis.get_windows_host import (get_windows_host_ip)
+# from postgres.connect import USER_POSTGRES, PASSWORD_POSTGRES
+from pathlib import Path
+project_root = Path(__file__).resolve().parents[2]
+
+USER_POSTGRES = 'postgres'
+PASSWORD_POSTGRES = 'tuantt'
+
+
+import subprocess
+
+def get_windows_host_ip():
+    # Chạy lệnh shell để lấy dòng default route
+    output = subprocess.check_output(['ip', 'route'], text=True)
+    for line in output.splitlines():
+        if line.startswith('default via'):
+            parts = line.split()
+            return parts[2]  # IP nằm ở vị trí thứ 3
+
+
+
 
 WINDOWS_HOST_IP = get_windows_host_ip()
 
-SOURCE_TOPIC = 'sale_transaction'
-CHECKPOINT_DIR = './spark/transform_fact_sale_checkpoints'
-STATES_DIR = './spark/transform_fact_sale_state'
+CHECKPOINT_DIR = str(project_root / './spark/transform_facts/transform_fact_sale_checkpoints')
+STATES_DIR = str(project_root / './spark/transform_facts/transform_fact_sale_state')
 
 spark = (SparkSession.builder
     .appName("Fact Sale Transformation")
-         .config("spark.jars.packages",
-                 "org.postgresql:postgresql:42.2.27,"
-                 "com.clickhouse:clickhouse-jdbc:0.6.0,org.apache.httpcomponents.client5:httpclient5:5.2.1")
+         # .config("spark.jars.packages",
+         #         "org.postgresql:postgresql:42.2.27,"
+         #         "com.clickhouse:clickhouse-jdbc:0.6.0,org.apache.httpcomponents.client5:httpclient5:5.2.1")
 
     .config("spark.sql.shuffle.partitions", 20)
     .config("spark.driver.memory", "8g")
